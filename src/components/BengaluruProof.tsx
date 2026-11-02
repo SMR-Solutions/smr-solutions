@@ -10,13 +10,13 @@ export const BengaluruProof: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
-            <span>Bengaluru Market Reality</span>
+            <span>Market Reality</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
-            76% of Bengaluru Customers Search Google Maps Before Visiting
+            76% of Local Customers Search Google Maps Before Visiting
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            If your business is not in the Top 3 Google Map results, you are silently losing high-paying walk-ins and phone inquiries to competitors down the street.
+            If your business is not ranking in the Top 3 on Google Maps, you are silently losing walk-ins and phone inquiries to competitors down the road.
           </p>
         </div>
 
@@ -42,11 +42,11 @@ export const BengaluruProof: React.FC = () => {
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-red-400 font-bold shrink-0">✕</span>
-                <span>Take 6 to 10 weeks to deliver, missing urgent festive & launch seasons.</span>
+                <span>Take 6 to 10 weeks to deliver, with endless delays and excuses.</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-red-400 font-bold shrink-0">✕</span>
-                <span>Slow page loads (5+ seconds) that lose 50%+ of mobile shoppers.</span>
+                <span>Slow page loads (5+ seconds) that lose 50%+ of mobile visitors.</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-red-400 font-bold shrink-0">✕</span>
@@ -74,23 +74,23 @@ export const BengaluruProof: React.FC = () => {
             <div className="space-y-4 text-sm text-slate-200">
               <div className="flex items-start gap-3">
                 <span className="text-emerald-400 font-bold shrink-0">✓</span>
-                <span><strong>Just ₹5,000 one-time</strong> with zero surprise development bills.</span>
+                <span><strong>Just ₹5,000 for The Complete Google Mapping:</strong> 100% upfront pricing.</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-emerald-400 font-bold shrink-0">✓</span>
-                <span><strong>48-Hour delivery:</strong> Your business is live and taking leads this week.</span>
+                <span><strong>3-5 Days Quality Launch:</strong> Done right with proper geo-tagging & category matching.</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-emerald-400 font-bold shrink-0">✓</span>
-                <span><strong>100/100 Lighthouse performance:</strong> Loads in under 0.5s on any network.</span>
+                <span><strong>Google Maps Local 3-Pack Ready:</strong> Optimized specifically for your locality.</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-emerald-400 font-bold shrink-0">✓</span>
-                <span><strong>Google Maps Local 3-Pack ready:</strong> Optimized specifically for Bengaluru local SEO.</span>
+                <span><strong>5-Star Review Countertop QR Code:</strong> Included to collect reviews fast.</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-emerald-400 font-bold shrink-0">✓</span>
-                <span><strong>Progressive Web App (PWA):</strong> Customers can install your app directly on their phones.</span>
+                <span><strong>Progressive Web App (PWA) Option:</strong> Full smartphone app experience.</span>
               </div>
             </div>
           </div>
@@ -98,23 +98,45 @@ export const BengaluruProof: React.FC = () => {
         </div>
 
         {/* Local Areas Grid Banner */}
-        <div className="p-8 rounded-3xl bg-slate-900/40 border border-slate-800 text-center max-w-4xl mx-auto">
-          <div className="flex items-center justify-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">
-            <MapPin className="w-4 h-4" />
-            <span>Active Support In Bengaluru Localities</span>
+        <div className="p-8 rounded-3xl bg-slate-900/40 border border-slate-800 text-center max-w-4xl mx-auto space-y-6">
+          <div>
+            <div className="flex items-center justify-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <MapPin className="w-4 h-4" />
+              <span>Locations We Serve</span>
+            </div>
+            <h4 className="text-xl sm:text-2xl font-black text-white">
+              Currently Serving Local Businesses In:
+            </h4>
           </div>
-          <h4 className="text-xl sm:text-2xl font-black text-white mb-4">
-            Helping Local Businesses Stand Out in Every Commercial Hub
-          </h4>
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
-            {siteConfig.serviceLocations.map((loc) => (
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {siteConfig.activeLocations.map((loc) => (
               <span
                 key={loc}
-                className="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:border-emerald-500/50 transition-colors"
+                className="px-4 py-2 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-sm font-bold text-emerald-300 shadow-md"
               >
                 📍 {loc}
               </span>
             ))}
+          </div>
+
+          <div className="pt-4 border-t border-slate-800">
+            <span className="text-xs font-medium text-slate-400 block mb-2.5">
+              Expanding soon to:
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {siteConfig.upcomingLocations.map((loc) => (
+                <span
+                  key={loc}
+                  className="px-3 py-1 rounded-lg bg-slate-800/60 border border-slate-700/60 text-xs text-slate-300"
+                >
+                  {loc}
+                </span>
+              ))}
+              <span className="px-3 py-1 rounded-lg bg-slate-800/30 text-xs text-slate-400 font-semibold">
+                & across all Bengaluru
+              </span>
+            </div>
           </div>
         </div>
 

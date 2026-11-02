@@ -11,20 +11,24 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
-                <span className="text-base">📍</span>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-500 shadow-md">
+                <img
+                  src="/logo.png"
+                  alt="SMR Solutions Logo"
+                  className="w-full h-full object-contain rounded-full bg-white"
+                />
               </div>
               <span className="font-extrabold text-lg text-white">
                 SMR <span className="text-emerald-400 font-light">Solutions</span>
               </span>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm max-w-md leading-relaxed">
-              We put Bengaluru businesses on the digital map. From Google Business Profile optimization to ultra-fast Progressive Web Apps (PWAs), we turn local searchers into loyal, paying customers.
+              We put your business on the digital map. From Google Business Profile optimization to high-speed Progressive Web Apps (PWAs), we turn local searchers into loyal, paying customers.
             </p>
             <div className="flex items-center gap-2 text-xs text-slate-400 pt-2">
               <MapPin className="w-4 h-4 text-emerald-400" />
-              <span>Bengaluru, Karnataka, India • 560001</span>
+              <span>Serving Kengeri, Rajarajeshwari Nagar & Bengaluru, Karnataka</span>
             </div>
           </div>
 
@@ -36,12 +40,12 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs">
               <li>
                 <a href="#services" className="hover:text-emerald-400 transition-colors">
-                  Google Maps 3-Pack SEO
+                  The Complete Google Mapping
                 </a>
               </li>
               <li>
                 <a href="#services" className="hover:text-cyan-400 transition-colors">
-                  Modern 100-Speed Websites
+                  Modern Ultra-Fast Websites
                 </a>
               </li>
               <li>
@@ -51,7 +55,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#pricing" className="text-emerald-400 font-semibold hover:underline">
-                  ₹5,000 Starter Package
+                  ₹5,000 Starter Offer
                 </a>
               </li>
             </ul>
@@ -85,7 +89,7 @@ export const Footer: React.FC = () => {
               </li>
               <li className="pt-2">
                 <span className="inline-block px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-400 font-semibold">
-                  ⚡ 48-Hour Rapid Delivery Guarantee
+                  ⚡ 3-5 Days Quality Launch Guarantee
                 </span>
               </li>
             </ul>
@@ -96,10 +100,10 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} SMR Solutions. All rights reserved. Built for Bengaluru Businesses.
+            © {new Date().getFullYear()} SMR Solutions. All rights reserved.
           </div>
           <div className="flex items-center gap-1 text-slate-400">
-            <span>Engineered with high performance React & PWA technology</span>
+            <span>Serving Kengeri • Rajarajeshwari Nagar • Bengaluru</span>
           </div>
         </div>
 

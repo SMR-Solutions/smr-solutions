@@ -111,3 +111,4 @@ const outDir = path.resolve('public');
 fs.writeFileSync(path.join(outDir, 'pwa-192x192.png'), createPng(192));
 fs.writeFileSync(path.join(outDir, 'pwa-512x512.png'), createPng(512));
 console.log('Successfully generated PWA icons in public/ directory!');
+

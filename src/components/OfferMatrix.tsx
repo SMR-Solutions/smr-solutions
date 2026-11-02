@@ -21,34 +21,34 @@ export const OfferMatrix: React.FC = () => {
             Transparent Pricing That Builds Instant Trust
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            No monthly retainer lock-ins. No surprise agency invoices. Just pure results for your Bengaluru business starting at a fraction of standard agency costs.
+            No monthly retainer lock-ins. No surprise agency invoices. Delivered in 3-5 days with complete quality guarantee.
           </p>
         </div>
 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-5xl mx-auto">
           
-          {/* Main Featured Hero Card: ₹5,000 Starter Digital Launch */}
-          <div className="lg:col-span-7 relative rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border-2 border-emerald-500 shadow-2xl shadow-emerald-950/60 p-8 sm:p-10 flex flex-col justify-between">
+          {/* Main Featured Hero Card: ₹5,000 The Complete Google Mapping */}
+          <div className="lg:col-span-6 relative rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border-2 border-emerald-500 shadow-2xl shadow-emerald-950/60 p-8 sm:p-10 flex flex-col justify-between">
             
             {/* Popular Badge */}
             <div className="absolute -top-4 left-8 px-4 py-1.5 rounded-full bg-emerald-500 text-slate-950 font-black text-xs tracking-wider uppercase shadow-lg flex items-center gap-1.5">
               <Star className="w-3.5 h-3.5 fill-slate-950" />
-              <span>Most Popular Bengaluru Choice</span>
+              <span>The Complete Google Mapping</span>
             </div>
 
             <div>
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div>
                   <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                    Bengaluru Starter Launch
+                    The Complete Google Mapping
                   </h3>
                   <p className="text-sm text-slate-400 mt-1">
-                    The complete Google Maps & 1-Page PWA website package.
+                    Get verified and rank on Google Maps so local customers find and call you first.
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs text-slate-500 line-through block font-medium">₹12,000</span>
+                  <span className="text-xs text-slate-500 line-through block font-medium">₹10,000</span>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl sm:text-5xl font-black text-emerald-400">₹5,000</span>
                   </div>
@@ -59,13 +59,13 @@ export const OfferMatrix: React.FC = () => {
               {/* Delivery Speed Pill */}
               <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-2.5 mb-6 text-xs text-emerald-300 font-semibold">
                 <Zap className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Lightning 48-Hour Turnaround • Ready to launch this week</span>
+                <span>Turnaround in just 3-5 days • That's it!</span>
               </div>
 
               {/* Features List */}
               <div className="space-y-3.5 mb-8">
                 <div className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-                  What's Included in Your ₹5,000 Package:
+                  What's Included:
                 </div>
 
                 {siteConfig.pricing[0].features.map((item, idx) => (
@@ -90,56 +90,61 @@ export const OfferMatrix: React.FC = () => {
                 className="w-full inline-flex items-center justify-center gap-3 py-4 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-base shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all hover:scale-[1.02] active:scale-[0.99] group"
               >
                 <MessageCircle className="w-5 h-5 fill-slate-950 group-hover:scale-110 transition-transform" />
-                <span>Claim ₹5,000 Launch Package</span>
+                <span>Claim ₹5,000 Google Mapping</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <div className="flex items-center justify-center gap-2 mt-3 text-xs text-slate-400">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Pay only after onboarding call & plan approval</span>
+                <span>Pay only after onboarding confirmation</span>
               </div>
             </div>
 
           </div>
 
-          {/* Secondary Card: ₹9,999 Bengaluru Local Dominator */}
-          <div className="lg:col-span-5 relative rounded-3xl bg-slate-900/60 border border-slate-800 p-8 sm:p-10 flex flex-col justify-between hover:border-slate-700 transition-colors">
+          {/* Secondary Card: ₹9,999 Google Mapping + Website & Custom PWA */}
+          <div className="lg:col-span-6 relative rounded-3xl bg-slate-900/60 border border-slate-700/80 p-8 sm:p-10 flex flex-col justify-between hover:border-cyan-500/60 transition-colors shadow-2xl">
             
+            <div className="absolute -top-4 left-8 px-4 py-1.5 rounded-full bg-cyan-500 text-slate-950 font-black text-xs tracking-wider uppercase shadow-lg flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Complete Digital Combo</span>
+            </div>
+
             <div>
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-                    Local Dominator
+                  <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                    Maps + Web + Custom PWA
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1">
-                    For businesses targeting multi-locality dominance.
+                  <p className="text-sm text-slate-400 mt-1">
+                    Google Maps ranking plus an ultra-fast website and installable app.
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs text-slate-500 line-through block font-medium">₹22,000</span>
+                  <span className="text-xs text-slate-500 line-through block font-medium">₹20,000</span>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-3xl sm:text-4xl font-black text-white">₹9,999</span>
+                    <span className="text-4xl sm:text-5xl font-black text-white">₹9,999</span>
                   </div>
-                  <span className="text-[11px] font-semibold text-slate-400 block">One-Time Build</span>
+                  <span className="text-[11px] font-semibold text-slate-400 block">One-Time All-Inclusive</span>
                 </div>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-800/60 border border-slate-700/60 flex items-center gap-2 mb-6 text-xs text-cyan-300 font-semibold">
+              <div className="p-3 rounded-2xl bg-cyan-950/40 border border-cyan-500/40 flex items-center gap-2 mb-6 text-xs text-cyan-300 font-semibold">
                 <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>Includes 30 Days of Rank Monitoring</span>
+                <span>Turnaround in just 3-5 days • Full Online Presence</span>
               </div>
 
               {/* Features List */}
               <div className="space-y-3.5 mb-8">
-                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-                  Everything in Starter, Plus:
+                <div className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                  What's Included:
                 </div>
 
-                {siteConfig.pricing[1].features.slice(1).map((item, idx) => (
+                {siteConfig.pricing[1].features.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                     </div>
-                    <span className="text-xs sm:text-sm text-slate-300 font-medium leading-tight">
+                    <span className="text-sm text-slate-200 font-medium leading-tight">
                       {item}
                     </span>
                   </div>
@@ -152,37 +157,19 @@ export const OfferMatrix: React.FC = () => {
                 href={siteConfig.getWhatsAppUrl(siteConfig.pricing[1].whatsappMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm transition-all border border-slate-700 hover:border-slate-600"
+                className="w-full inline-flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-base shadow-xl shadow-cyan-500/25 transition-all hover:scale-[1.02] active:scale-[0.99]"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Discuss Dominator Plan</span>
+                <MessageCircle className="w-5 h-5 fill-slate-950" />
+                <span>Get Complete Combo Plan</span>
+                <ArrowRight className="w-4 h-4" />
               </a>
-              <div className="text-center mt-3 text-xs text-slate-500">
-                Ideal for established clinics, showrooms & multi-outlets
+              <div className="text-center mt-3 text-xs text-slate-400">
+                Ideal for clinics, cafes, retail showrooms & boutique services
               </div>
             </div>
 
           </div>
 
-        </div>
-
-        {/* Comparison Callout */}
-        <div className="mt-12 max-w-3xl mx-auto p-5 rounded-2xl bg-slate-900/40 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">💡</span>
-            <div>
-              <div className="text-sm font-bold text-white">Need a custom multi-page site or custom booking system?</div>
-              <div className="text-xs text-slate-400">We customize our modern tech stack for your exact business requirements.</div>
-            </div>
-          </div>
-          <a
-            href={siteConfig.getWhatsAppUrl("Hi SMR Solutions! I have a custom requirement for my business website.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-bold text-emerald-400 hover:text-emerald-300 underline shrink-0"
-          >
-            Ask for Custom Quote →
-          </a>
         </div>
 
       </div>

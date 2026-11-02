@@ -22,30 +22,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#070A12]/90 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/40'
+          ? 'bg-[#070A12]/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/40'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Logo and Brand */}
+          {/* Logo and Brand with User-provided PNG */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500/20 via-cyan-500/10 to-blue-600/20 border border-emerald-500/30 group-hover:border-emerald-400/60 transition-colors shadow-inner">
-              <svg className="w-6 h-6 transform group-hover:scale-105 transition-transform" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="42" stroke="url(#navLogoGrad)" strokeWidth="8" strokeDasharray="6 4" />
-                <path d="M50 20 C36 20 25 31 25 45 C25 61 46 80 50 83 C54 80 75 61 75 45 C75 31 64 20 50 20 Z" fill="#10B981" />
-                <circle cx="50" cy="43" r="10" fill="#070A12" />
-                <circle cx="50" cy="43" r="5" fill="#38BDF8" />
-                <defs>
-                  <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#10B981" />
-                    <stop offset="100%" stopColor="#38BDF8" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#070A12] animate-ping" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#070A12]" />
+            <div className="relative flex items-center justify-center w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-500 shadow-md group-hover:scale-105 transition-transform">
+              <img
+                src="/logo.png"
+                alt="SMR Solutions Logo"
+                className="w-full h-full object-contain rounded-full bg-white"
+              />
+              <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#070A12] animate-ping" />
+              <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#070A12]" />
             </div>
 
             <div className="flex flex-col">
@@ -54,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
                   SMR <span className="text-emerald-400 font-light">Solutions</span>
                 </span>
                 <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hidden sm:inline-block">
-                  Bengaluru
+                  Kengeri • RR Nagar
                 </span>
               </div>
               <span className="text-xs text-slate-400 tracking-wide">
@@ -89,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
               href="#why-bengaluru"
               className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
             >
-              Why Us
+              Locations
             </a>
             <a
               href="#faqs"
@@ -149,7 +142,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
         <div className="md:hidden bg-[#0a0f1d] border-b border-slate-800 px-4 pt-3 pb-6 space-y-3 shadow-2xl animate-in slide-in-from-top duration-200">
           <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-slate-900/60 border border-slate-800 text-xs text-slate-400">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Bengaluru's Trusted Local Business Partner</span>
+            <span>Serving Kengeri, Rajarajeshwari Nagar & Bengaluru</span>
           </div>
 
           <div className="flex flex-col space-y-1">
@@ -158,7 +151,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60"
             >
-              Our 3 Services (Maps, Web, PWA)
+              Our Services (Google Mapping & PWA)
             </a>
             <a
               href="#pwa-demo"
@@ -173,15 +166,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2.5 rounded-lg text-base font-semibold text-emerald-400 hover:bg-slate-800/60 flex items-center justify-between"
             >
-              <span>₹5,000 Starter Package</span>
-              <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">Limited</span>
+              <span>₹5,000 Google Mapping</span>
+              <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">3-5 Days</span>
             </a>
             <a
               href="#why-bengaluru"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60"
             >
-              Why Bengaluru Businesses Need This
+              Active Locations
             </a>
             <a
               href="#faqs"

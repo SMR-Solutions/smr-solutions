@@ -5,7 +5,6 @@ import { PwaDemoSection } from './components/PwaDemoSection';
 import { Services } from './components/Services';
 import { OfferMatrix } from './components/OfferMatrix';
 import { BengaluruProof } from './components/BengaluruProof';
-import { RoiCalculator } from './components/RoiCalculator';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
@@ -62,7 +61,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#070A12] text-slate-100 flex flex-col font-sans">
-      {/* Navigation */}
+      {/* Navigation with Brand Logo */}
       <Navbar onOpenInstallModal={() => setIsInstallModalOpen(true)} />
 
       {/* Main One-Page Conversion Funnel */}
@@ -78,26 +77,23 @@ export const App: React.FC = () => {
           isAppInstalled={isAppInstalled}
         />
 
-        {/* 3. The Services Trinity: Maps, Web, PWA */}
+        {/* 3. Services: The Complete Google Mapping, Modern Websites, PWAs */}
         <Services />
 
-        {/* 4. Transparent Pricing: The ₹5,000 Digital Cards */}
+        {/* 4. Transparent Pricing: ₹5,000 Complete Google Mapping vs ₹9,999 Digital Combo */}
         <OfferMatrix />
 
-        {/* 5. Bengaluru Market Proof & Why Traditional Agencies Fail */}
+        {/* 5. Local Proof & Areas: Kengeri, Rajarajeshwari Nagar & Beyond */}
         <BengaluruProof />
 
-        {/* 6. Interactive ROI & Lead Revenue Calculator */}
-        <RoiCalculator />
-
-        {/* 7. Frequently Asked Questions */}
+        {/* 6. Frequently Asked Questions */}
         <FaqSection />
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Sticky High-Converting Floating WhatsApp Lead Widget */}
+      {/* Sticky Floating WhatsApp Lead Widget */}
       <FloatingWhatsApp />
 
       {/* PWA Step-by-Step Installation Modal */}
