@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
                 />
               </div>
               <span className="font-extrabold text-lg text-slate-900 dark:text-white">
-                SMR <span className="text-emerald-600 dark:text-emerald-400 font-light">Solutions</span>
+                SMR <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">Solutions</span>
               </span>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm max-w-md leading-relaxed">

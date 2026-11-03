@@ -46,14 +46,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled }) 
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-base sm:text-xl tracking-tight text-slate-900 dark:text-white group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors whitespace-nowrap">
-                  SMR <span className="text-emerald-600 dark:text-emerald-400 font-light">Solutions</span>
+                  SMR <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">Solutions</span>
                 </span>
                 <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 hidden xl:inline-block">
                   Kengeri • RR Nagar
                 </span>
               </div>
-              <span className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 tracking-wide truncate max-w-[120px] sm:max-w-none">
-                Google Maps & Web Funnels
+              <span className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 tracking-wide truncate max-w-[150px] sm:max-w-none">
+                Google Maps & Web Services
               </span>
             </div>
           </a>

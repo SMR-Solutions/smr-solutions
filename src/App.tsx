@@ -89,7 +89,7 @@ const MainApp: React.FC = () => {
       {/* Navigation with Brand Logo & Light/Dark Switch */}
       <Navbar onInstallApp={handleInstallApp} isAppInstalled={isAppInstalled} />
 
-      {/* Main One-Page Conversion Funnel */}
+      {/* Main One-Page Web Services */}
       <main className="flex-1">
         {/* 1. Hero Section */}
         <Hero onInstallApp={handleInstallApp} isAppInstalled={isAppInstalled} />

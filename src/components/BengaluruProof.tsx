@@ -66,7 +66,7 @@ export const BengaluruProof: React.FC = () => {
                 <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">The SMR Solutions Fast-Funnel</h3>
+                <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">The SMR Solutions Web & Maps Services</h3>
                 <span className="text-[11px] sm:text-xs text-emerald-700 dark:text-emerald-400 font-semibold">High impact, high ROI, rapid launch</span>
               </div>
             </div>

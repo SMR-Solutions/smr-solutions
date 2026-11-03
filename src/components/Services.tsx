@@ -97,7 +97,7 @@ export const Services: React.FC = () => {
                 Modern Websites
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-5 sm:mb-6 leading-relaxed">
-                Clean, single-page conversion funnels engineered to convert mobile visitors directly into direct WhatsApp leads.
+                Clean, single-page modern websites and high-impact web services engineered to convert mobile visitors directly into direct WhatsApp leads.
               </p>
 
               <div className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">

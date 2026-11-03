@@ -16,7 +16,7 @@ export default defineConfig({
       },
       includeAssets: ['favicon.png', 'logo.png', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifest: {
-        name: 'SMR Solutions | Google Maps & Web Funnels',
+        name: 'SMR Solutions | Google Maps & Web Services',
         short_name: 'SMR Solutions',
         description: 'We put Bengaluru businesses on the digital map with Google Maps Optimization, modern websites, and custom PWAs.',
         theme_color: '#070A12',
