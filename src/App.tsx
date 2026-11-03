@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { PwaDemoSection } from './components/PwaDemoSection';
@@ -9,7 +10,7 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
-export const App: React.FC = () => {
+const MainApp: React.FC = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isAppInstalled, setIsAppInstalled] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -66,7 +67,6 @@ export const App: React.FC = () => {
         console.error('Install prompt error:', err);
       }
     } else {
-      // Browser doesn't have pending beforeinstallprompt (e.g. Safari on iOS or already prompted)
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       if (isIOS) {
         showToast('To install on iPhone: Tap Share (⎋) and select "Add to Home Screen"');
@@ -77,16 +77,16 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#070A12] text-slate-100 flex flex-col font-sans">
-      {/* Toast Notification (subtle, non-intrusive, no modal) */}
+    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#070A12] dark:text-slate-100 flex flex-col font-sans transition-colors duration-300">
+      {/* Toast Notification (subtle, non-intrusive) */}
       {toastMessage && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-xl bg-slate-900/95 border border-emerald-500/60 text-white text-xs sm:text-sm font-semibold shadow-2xl shadow-emerald-950/60 flex items-center gap-2 animate-in fade-in slide-in-from-top-4 duration-200">
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-xl bg-white/95 dark:bg-slate-900/95 border border-emerald-500 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold shadow-2xl shadow-emerald-500/20 flex items-center gap-2 animate-in fade-in slide-in-from-top-4 duration-200">
           <span>📱</span>
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Navigation with Brand Logo */}
+      {/* Navigation with Brand Logo & Light/Dark Switch */}
       <Navbar onInstallApp={handleInstallApp} isAppInstalled={isAppInstalled} />
 
       {/* Main One-Page Conversion Funnel */}
@@ -119,6 +119,14 @@ export const App: React.FC = () => {
       {/* Sticky Floating WhatsApp Lead Widget */}
       <FloatingWhatsApp />
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <ThemeProvider>
+      <MainApp />
+    </ThemeProvider>
   );
 };
 

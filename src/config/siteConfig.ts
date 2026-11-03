@@ -265,7 +265,7 @@ export const siteConfig = {
       icon: "MapPin",
       emoji: "🗺️",
       title: "The Complete Google Mapping",
-      shortDesc: "Rank #1 on Google Local 3-Pack when customers search 'near me'.",
+      shortDesc: "Rank on Google Local 3-Pack when customers search 'near me'.",
       benefits: [
         "Google Business Profile (GBP) creation & verification support",
         "Hyper-local geo-tagging & category optimization for Kengeri, RR Nagar & Bengaluru",
