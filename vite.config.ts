@@ -10,13 +10,17 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: 'auto',
+      devOptions: {
+        enabled: true,
+      },
       includeAssets: ['favicon.png', 'logo.png', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifest: {
-        name: 'SMR Solutions | Bengaluru Digital Growth & Websites',
+        name: 'SMR Solutions | Google Maps & Web Funnels',
         short_name: 'SMR Solutions',
         description: 'We put Bengaluru businesses on the digital map with Google Maps Optimization, modern websites, and custom PWAs.',
-        theme_color: '#0a0f1d',
-        background_color: '#0a0f1d',
+        theme_color: '#070A12',
+        background_color: '#070A12',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/',
