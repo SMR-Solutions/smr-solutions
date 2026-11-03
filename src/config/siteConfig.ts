@@ -113,7 +113,7 @@ const portfolioData: PortfolioProject[] = [
   },
   {
     id: "vaishnavi-pg",
-    name: "Vaishnavi PG for Ladies & Gents",
+    name: "Vaishnavi PG for Ladies",
     tagline: "Premium Student & Executive Living",
     category: "PG Website & Digital Profile",
     badge: "⭐ Luxury Living PG",
