@@ -23,48 +23,48 @@ export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled }) 
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#070A12]/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/40'
-          : 'bg-transparent border-b border-transparent'
+          ? 'bg-[#070A12]/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/50'
+          : 'bg-[#070A12]/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none border-b border-slate-900/50 sm:border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Logo and Brand with User-provided PNG */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-500 shadow-md group-hover:scale-105 transition-transform">
+          {/* Logo and Brand - Compact & Responsive */}
+          <a href="#" className="flex items-center gap-2.5 group min-w-0">
+            <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-500 shadow-md group-hover:scale-105 transition-transform shrink-0">
               <img
                 src="/logo.png"
                 alt="SMR Solutions Logo"
                 className="w-full h-full object-contain rounded-full bg-white"
               />
-              <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#070A12] animate-ping" />
-              <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[#070A12]" />
+              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-[#070A12] animate-ping" />
+              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-[#070A12]" />
             </div>
 
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xl tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            <div className="flex flex-col min-w-0">
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-base sm:text-xl tracking-tight text-white group-hover:text-emerald-400 transition-colors whitespace-nowrap">
                   SMR <span className="text-emerald-400 font-light">Solutions</span>
                 </span>
-                <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hidden sm:inline-block">
+                <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hidden lg:inline-block">
                   Kengeri • RR Nagar
                 </span>
               </div>
-              <span className="text-xs text-slate-400 tracking-wide">
+              <span className="text-[10px] sm:text-xs text-slate-400 tracking-wide truncate max-w-[130px] sm:max-w-none">
                 Google Maps & Web Funnels
               </span>
             </div>
           </a>
 
-          {/* Desktop Nav Links in the exact requested order:
+          {/* Desktop Nav Links in strict sequence:
               1. Services
               2. ₹5,000 Offer
               3. Locations
               4. Live PWA Demo
               5. FAQ
           */}
-          <nav className="hidden md:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             <a
               href="#services"
               className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
@@ -99,8 +99,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled }) 
             </a>
           </nav>
 
-          {/* Quick Actions (Install Web App + WhatsApp CTA) */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
             <button
               onClick={onInstallApp}
               className="px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-emerald-500/50 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
@@ -130,105 +130,115 @@ export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled }) 
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-2">
+          {/* Small & Medium Screen Actions:
+              Removed the WhatsApp message icon
+              Removed the text "Install" - kept ONLY the download icon
+              Plus the hamburger menu icon
+          */}
+          <div className="lg:hidden flex items-center gap-2 shrink-0">
+            {/* Clean, icon-only Install Button */}
             <button
               onClick={onInstallApp}
-              className="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1"
+              className="p-2 sm:p-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-cyan-400 hover:text-cyan-300 border border-slate-700 active:scale-95 transition-all shadow-sm flex items-center justify-center cursor-pointer"
+              aria-label="Install Web App"
+              title="Install Web App"
             >
-              <Download className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Install</span>
+              {isAppInstalled ? (
+                <Check className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
+              ) : (
+                <Download className="w-4 h-4 sm:w-5 sm:h-5" />
+              )}
             </button>
 
-            <a
-              href={siteConfig.getWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-emerald-500 text-slate-950 font-bold"
-              aria-label="WhatsApp"
-            >
-              <MessageCircle className="w-5 h-5 fill-slate-950" />
-            </a>
-
+            {/* Hamburger Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700"
+              className="p-2 sm:p-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 active:scale-95 transition-all flex items-center justify-center cursor-pointer"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? (
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
+              ) : (
+                <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
+              )}
             </button>
           </div>
+
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown Menu (Accessible & Full-Screen Ready) */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0a0f1d] border-b border-slate-800 px-4 pt-3 pb-6 space-y-3 shadow-2xl animate-in slide-in-from-top duration-200">
-          <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-slate-900/60 border border-slate-800 text-xs text-slate-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Serving Kengeri, Rajarajeshwari Nagar & Bengaluru</span>
+        <div className="lg:hidden bg-[#0a0f1d]/98 backdrop-blur-xl border-b border-slate-800 px-4 pt-3 pb-6 space-y-3 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+          <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-slate-900/80 border border-slate-800 text-xs text-slate-400">
+            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span className="truncate">Serving Kengeri, Rajarajeshwari Nagar & Bengaluru</span>
           </div>
 
-          {/* Mobile links in requested order */}
+          {/* Navigation Links */}
           <div className="flex flex-col space-y-1">
             <a
               href="#services"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60"
+              className="px-3 py-2.5 rounded-lg text-sm sm:text-base font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
             >
               Services
             </a>
             <a
               href="#pricing"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-base font-semibold text-emerald-400 hover:bg-slate-800/60 flex items-center justify-between"
+              className="px-3 py-2.5 rounded-lg text-sm sm:text-base font-semibold text-emerald-400 hover:bg-slate-800/60 transition-colors flex items-center justify-between"
             >
               <span>₹5,000 Offer</span>
-              <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">3-5 Days</span>
+              <span className="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                3-5 Days
+              </span>
             </a>
             <a
               href="#why-bengaluru"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60"
+              className="px-3 py-2.5 rounded-lg text-sm sm:text-base font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
             >
               Locations
             </a>
             <a
               href="#pwa-demo"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60 flex items-center justify-between"
+              className="px-3 py-2.5 rounded-lg text-sm sm:text-base font-medium text-slate-200 hover:bg-slate-800/60 transition-colors flex items-center justify-between"
             >
               <span>Live PWA Demo</span>
-              <span className="text-xs bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/30">Real Work</span>
+              <span className="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/30">
+                Real Work
+              </span>
             </a>
             <a
               href="#faqs"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60"
+              className="px-3 py-2.5 rounded-lg text-sm sm:text-base font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
             >
               FAQ
             </a>
           </div>
 
-          <div className="pt-2 flex flex-col gap-2">
+          <div className="pt-2 flex flex-col gap-2.5">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onInstallApp();
               }}
-              className="w-full py-2.5 rounded-xl text-center text-sm font-semibold bg-slate-800 text-slate-200 border border-slate-700 flex items-center justify-center gap-2 cursor-pointer hover:bg-slate-700"
+              className="w-full py-2.5 px-4 rounded-xl text-center text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
             >
               <Download className="w-4 h-4 text-cyan-400" />
-              <span>Install Web App</span>
+              <span>{isAppInstalled ? 'Web App Installed ✓' : 'Install Web App on Phone'}</span>
             </button>
 
             <a
               href={siteConfig.getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 rounded-xl text-center font-bold text-slate-950 bg-emerald-500 hover:bg-emerald-400 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+              className="w-full py-3 rounded-xl text-center font-bold text-sm sm:text-base text-slate-950 bg-emerald-500 hover:bg-emerald-400 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all"
             >
-              <MessageCircle className="w-5 h-5 fill-slate-950" />
+              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-slate-950" />
               <span>Chat on WhatsApp Now</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </a>

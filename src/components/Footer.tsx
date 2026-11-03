@@ -4,15 +4,15 @@ import { siteConfig } from '../config/siteConfig';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="pt-16 pb-24 md:pb-16 bg-[#04060c] border-t border-slate-800 text-slate-400 text-xs sm:text-sm">
+    <footer className="pt-12 sm:pt-16 pb-24 md:pb-16 bg-[#04060c] border-t border-slate-800 text-slate-400 text-xs sm:text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
           
           {/* Brand Info */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="sm:col-span-2 space-y-3 sm:space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-500 shadow-md">
+              <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-500 shadow-md shrink-0">
                 <img
                   src="/logo.png"
                   alt="SMR Solutions Logo"
@@ -26,15 +26,15 @@ export const Footer: React.FC = () => {
             <p className="text-slate-400 text-xs sm:text-sm max-w-md leading-relaxed">
               We put your business on the digital map. From Google Business Profile optimization to high-speed Progressive Web Apps (PWAs), we turn local searchers into loyal, paying customers.
             </p>
-            <div className="flex items-center gap-2 text-xs text-slate-400 pt-2">
-              <MapPin className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center gap-2 text-xs text-slate-400 pt-1">
+              <MapPin className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>Serving Kengeri, Rajarajeshwari Nagar & Bengaluru, Karnataka</span>
             </div>
           </div>
 
           {/* Quick Nav */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 sm:mb-4">
               Growth Solutions
             </h4>
             <ul className="space-y-2 text-xs">
@@ -63,10 +63,10 @@ export const Footer: React.FC = () => {
 
           {/* Contact Details */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 sm:mb-4">
               Get in Touch
             </h4>
-            <ul className="space-y-3 text-xs">
+            <ul className="space-y-2.5 sm:space-y-3 text-xs">
               <li>
                 <a
                   href={siteConfig.getWhatsAppUrl()}
@@ -74,8 +74,8 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-emerald-400 font-semibold hover:underline"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp: {siteConfig.phone}</span>
+                  <MessageCircle className="w-4 h-4 shrink-0" />
+                  <span className="truncate">WhatsApp: {siteConfig.phone}</span>
                 </a>
               </li>
               <li>
@@ -83,11 +83,11 @@ export const Footer: React.FC = () => {
                   href={`mailto:${siteConfig.email}`}
                   className="inline-flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-cyan-400" />
-                  <span>{siteConfig.email}</span>
+                  <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span className="truncate">{siteConfig.email}</span>
                 </a>
               </li>
-              <li className="pt-2">
+              <li className="pt-1">
                 <span className="inline-block px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-400 font-semibold">
                   ⚡ 3-5 Days Quality Launch Guarantee
                 </span>
@@ -98,7 +98,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="pt-6 sm:pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 text-center sm:text-left">
           <div>
             © {new Date().getFullYear()} SMR Solutions. All rights reserved.
           </div>
