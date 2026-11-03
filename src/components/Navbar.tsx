@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, Menu, X, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { MessageCircle, Menu, X, ArrowRight, ShieldCheck, Download, Check } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 interface NavbarProps {
-  onOpenInstallModal: () => void;
+  onInstallApp: () => void;
+  isAppInstalled: boolean;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -56,20 +57,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
             </div>
           </a>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Nav Links in the exact requested order:
+              1. Services
+              2. ₹5,000 Offer
+              3. Locations
+              4. Live PWA Demo
+              5. FAQ
+          */}
+          <nav className="hidden md:flex items-center gap-7">
             <a
               href="#services"
               className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
             >
               Services
-            </a>
-            <a
-              href="#pwa-demo"
-              className="text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              Live PWA Demo
             </a>
             <a
               href="#pricing"
@@ -85,6 +85,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
               Locations
             </a>
             <a
+              href="#pwa-demo"
+              className="text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"
+            >
+              <span className="text-cyan-400 text-xs">⚡</span>
+              Live PWA Demo
+            </a>
+            <a
               href="#faqs"
               className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
             >
@@ -92,15 +99,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
             </a>
           </nav>
 
-          {/* Quick Actions (Install PWA + WhatsApp CTA) */}
+          {/* Quick Actions (Install Web App + WhatsApp CTA) */}
           <div className="hidden sm:flex items-center gap-3">
             <button
-              onClick={onOpenInstallModal}
-              className="px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 border border-slate-700 transition-all flex items-center gap-1.5"
-              title="Test PWA App on your phone"
+              onClick={onInstallApp}
+              className="px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-emerald-500/50 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+              title="Install Web App directly on your device"
             >
-              <span>📱</span>
-              <span>Test PWA</span>
+              {isAppInstalled ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-emerald-300">Installed</span>
+                </>
+              ) : (
+                <>
+                  <Download className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Install Web App</span>
+                </>
+              )}
             </button>
 
             <a
@@ -116,6 +132,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={onInstallApp}
+              className="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1"
+            >
+              <Download className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Install</span>
+            </button>
+
             <a
               href={siteConfig.getWhatsAppUrl()}
               target="_blank"
@@ -145,28 +169,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
             <span>Serving Kengeri, Rajarajeshwari Nagar & Bengaluru</span>
           </div>
 
+          {/* Mobile links in requested order */}
           <div className="flex flex-col space-y-1">
             <a
               href="#services"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60"
             >
-              Our Services (Google Mapping & PWA)
-            </a>
-            <a
-              href="#pwa-demo"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60 flex items-center justify-between"
-            >
-              <span>Live PWA Demo</span>
-              <span className="text-xs bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/30">Interactive</span>
+              Services
             </a>
             <a
               href="#pricing"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2.5 rounded-lg text-base font-semibold text-emerald-400 hover:bg-slate-800/60 flex items-center justify-between"
             >
-              <span>₹5,000 Google Mapping</span>
+              <span>₹5,000 Offer</span>
               <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">3-5 Days</span>
             </a>
             <a
@@ -174,14 +191,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60"
             >
-              Active Locations
+              Locations
+            </a>
+            <a
+              href="#pwa-demo"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60 flex items-center justify-between"
+            >
+              <span>Live PWA Demo</span>
+              <span className="text-xs bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/30">Real Work</span>
             </a>
             <a
               href="#faqs"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60"
             >
-              Frequently Asked Questions
+              FAQ
             </a>
           </div>
 
@@ -189,12 +214,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInstallModal }) => {
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenInstallModal();
+                onInstallApp();
               }}
-              className="w-full py-2.5 rounded-xl text-center text-sm font-semibold bg-slate-800 text-slate-200 border border-slate-700 flex items-center justify-center gap-2"
+              className="w-full py-2.5 rounded-xl text-center text-sm font-semibold bg-slate-800 text-slate-200 border border-slate-700 flex items-center justify-center gap-2 cursor-pointer hover:bg-slate-700"
             >
-              <span>📱</span>
-              <span>How to Install this Web App (PWA)</span>
+              <Download className="w-4 h-4 text-cyan-400" />
+              <span>Install Web App</span>
             </button>
 
             <a

@@ -1,12 +1,13 @@
 import React from 'react';
-import { MessageCircle, MapPin, ArrowRight, Zap, Star } from 'lucide-react';
+import { MessageCircle, MapPin, ArrowRight, Zap, Star, Download, Check } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 interface HeroProps {
-  onOpenInstallModal: () => void;
+  onInstallApp: () => void;
+  isAppInstalled: boolean;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenInstallModal }) => {
+export const Hero: React.FC<HeroProps> = ({ onInstallApp, isAppInstalled }) => {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
       {/* Background radial gradient glow */}
@@ -51,7 +52,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInstallModal }) => {
           </p>
 
           {/* Conversion CTA Group */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             {/* Primary Prominent Green WhatsApp Button */}
             <a
               href={siteConfig.getWhatsAppUrl("Hi SMR Solutions! I want to put my business on the digital map and rank #1 on Google Maps.")}
@@ -76,23 +77,33 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInstallModal }) => {
             </a>
           </div>
 
-          {/* Quick interactive PWA hint */}
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-900/80 border border-slate-800 text-xs sm:text-sm text-slate-300 mb-10">
+          {/* Direct Install Web App trigger pill */}
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-900/80 border border-slate-800 text-xs sm:text-sm text-slate-300 mb-10 shadow-md">
             <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-cyan-500/20 text-cyan-400 font-bold text-xs">
-              ⚡
+              📱
             </span>
             <span>
-              Experience our tech: this site is a live <strong className="text-white">Progressive Web App (PWA)</strong>.
+              Experience our tech on your phone:
             </span>
             <button
-              onClick={onOpenInstallModal}
-              className="underline text-cyan-400 hover:text-cyan-300 font-medium cursor-pointer"
+              onClick={onInstallApp}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-cyan-300 font-bold text-xs border border-cyan-500/40 transition-all cursor-pointer"
             >
-              Try Installing It
+              {isAppInstalled ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Installed</span>
+                </>
+              ) : (
+                <>
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Install Web App</span>
+                </>
+              )}
             </button>
           </div>
 
-          {/* Trust Metrics Grid (Updated: 3-5 days delivery) */}
+          {/* Trust Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-4 border-t border-slate-800/80">
             <div className="p-3.5 rounded-xl bg-slate-900/40 border border-slate-800/80 flex flex-col items-center">
               <div className="flex items-center gap-1.5 text-emerald-400 font-extrabold text-xl sm:text-2xl">

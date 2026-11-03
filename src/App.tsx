@@ -8,12 +8,11 @@ import { BengaluruProof } from './components/BengaluruProof';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { InstallPromptModal } from './components/InstallPromptModal';
 
 export const App: React.FC = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isAppInstalled, setIsAppInstalled] = useState<boolean>(false);
-  const [isInstallModalOpen, setIsInstallModalOpen] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
     // Check if app is launched in standalone mode
@@ -29,6 +28,7 @@ export const App: React.FC = () => {
     const handleAppInstalled = () => {
       setIsAppInstalled(true);
       setDeferredPrompt(null);
+      showToast('App installed successfully!');
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -40,51 +40,74 @@ export const App: React.FC = () => {
     };
   }, []);
 
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 4000);
+  };
+
   const handleInstallApp = async () => {
-    if (!deferredPrompt) {
-      setIsInstallModalOpen(true);
+    if (isAppInstalled) {
+      showToast('Web App is already installed on your device!');
       return;
     }
 
-    try {
-      deferredPrompt.prompt();
-      const choiceResult = await deferredPrompt.userChoice;
-      if (choiceResult.outcome === 'accepted') {
-        setIsAppInstalled(true);
+    if (deferredPrompt) {
+      try {
+        deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+        if (choiceResult.outcome === 'accepted') {
+          setIsAppInstalled(true);
+          showToast('Installing SMR Solutions Web App...');
+        }
+        setDeferredPrompt(null);
+      } catch (err) {
+        console.error('Install prompt error:', err);
       }
-      setDeferredPrompt(null);
-    } catch (err) {
-      console.error('Install prompt error:', err);
-      setIsInstallModalOpen(true);
+    } else {
+      // Browser doesn't have pending beforeinstallprompt (e.g. Safari on iOS or already prompted)
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if (isIOS) {
+        showToast('To install on iPhone: Tap Share (⎋) and select "Add to Home Screen"');
+      } else {
+        showToast('To install: Tap browser menu (⋮) and select "Install App" or "Add to Home Screen"');
+      }
     }
   };
 
   return (
     <div className="min-h-screen bg-[#070A12] text-slate-100 flex flex-col font-sans">
+      {/* Toast Notification (subtle, non-intrusive, no modal) */}
+      {toastMessage && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-xl bg-slate-900/95 border border-emerald-500/60 text-white text-xs sm:text-sm font-semibold shadow-2xl shadow-emerald-950/60 flex items-center gap-2 animate-in fade-in slide-in-from-top-4 duration-200">
+          <span>📱</span>
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
       {/* Navigation with Brand Logo */}
-      <Navbar onOpenInstallModal={() => setIsInstallModalOpen(true)} />
+      <Navbar onInstallApp={handleInstallApp} isAppInstalled={isAppInstalled} />
 
       {/* Main One-Page Conversion Funnel */}
       <main className="flex-1">
         {/* 1. Hero Section */}
-        <Hero onOpenInstallModal={() => setIsInstallModalOpen(true)} />
+        <Hero onInstallApp={handleInstallApp} isAppInstalled={isAppInstalled} />
 
-        {/* 2. Interactive PWA Prompt & Live Demo Area */}
+        {/* 2. Services: The Complete Google Mapping, Modern Websites, PWAs */}
+        <Services />
+
+        {/* 3. Transparent Pricing: ₹5,000 Complete Google Mapping vs ₹9,999 Digital Combo */}
+        <OfferMatrix />
+
+        {/* 4. Local Proof & Areas: Kengeri, Rajarajeshwari Nagar & Beyond */}
+        <BengaluruProof />
+
+        {/* 5. Real Businesses Showcase & Live PWA Demo */}
         <PwaDemoSection
-          onOpenInstallModal={() => setIsInstallModalOpen(true)}
-          deferredPrompt={deferredPrompt}
           onInstallApp={handleInstallApp}
           isAppInstalled={isAppInstalled}
         />
-
-        {/* 3. Services: The Complete Google Mapping, Modern Websites, PWAs */}
-        <Services />
-
-        {/* 4. Transparent Pricing: ₹5,000 Complete Google Mapping vs ₹9,999 Digital Combo */}
-        <OfferMatrix />
-
-        {/* 5. Local Proof & Areas: Kengeri, Rajarajeshwari Nagar & Beyond */}
-        <BengaluruProof />
 
         {/* 6. Frequently Asked Questions */}
         <FaqSection />
@@ -95,15 +118,6 @@ export const App: React.FC = () => {
 
       {/* Sticky Floating WhatsApp Lead Widget */}
       <FloatingWhatsApp />
-
-      {/* PWA Step-by-Step Installation Modal */}
-      <InstallPromptModal
-        isOpen={isInstallModalOpen}
-        onClose={() => setIsInstallModalOpen(false)}
-        deferredPrompt={deferredPrompt}
-        onInstallApp={handleInstallApp}
-        isAppInstalled={isAppInstalled}
-      />
     </div>
   );
 };
