@@ -75,11 +75,11 @@ const MainApp: React.FC = () => {
 
   useEffect(() => {
     if (currentRoute === 'compliance') {
-      document.title = "Government Registration & Compliance | SMR Solutions (Online)";
+      document.title = "Government Registration & Compliance | SMR Solutions";
     } else if (currentRoute === 'terms') {
-      document.title = "Terms of Service | SMR Solutions (Online)";
+      document.title = "Terms of Service | SMR Solutions";
     } else if (currentRoute === 'privacy') {
-      document.title = "Privacy Policy | SMR Solutions (Online)";
+      document.title = "Privacy Policy | SMR Solutions";
     } else {
       document.title = "SMR Solutions | Google Maps Optimization & Modern Websites";
     }

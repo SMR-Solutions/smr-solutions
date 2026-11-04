@@ -371,8 +371,8 @@ export const siteConfig = {
 
   compliance: {
     title: "Government Registration & Compliance",
-    officialStatusText: "SMR Solutions (Online) is officially registered as a Micro Enterprise with the Ministry of Micro, Small & Medium Enterprises (MSME), Government of India.",
-    enterpriseName: "SMR Solutions (Online)",
+    officialStatusText: "SMR Solutions is officially registered as a Micro Enterprise with the Ministry of Micro, Small & Medium Enterprises (MSME), Government of India.",
+    enterpriseName: "SMR Solutions",
     enterpriseType: "Micro Enterprise",
     ministry: "Ministry of Micro, Small & Medium Enterprises (MSME)",
     government: "Government of India",

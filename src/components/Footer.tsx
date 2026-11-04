@@ -123,7 +123,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom Bar */}
         <div className="pt-6 sm:pt-8 border-t border-slate-200 dark:border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3">
-            <span>© {new Date().getFullYear()} SMR Solutions (Online). All rights reserved.</span>
+            <span>© {new Date().getFullYear()} SMR Solutions. All rights reserved.</span>
             <span>•</span>
             <button
               onClick={onNavigateTerms}

@@ -103,13 +103,13 @@ export const TermsPage: React.FC<TermsPageProps> = ({
             Terms of Service
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-            Last Updated: {new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })} • Applicable to smrsolutions.online
+            Last Updated: {new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })} • Applicable to smrsolutions.netlify.app
           </p>
         </div>
 
         {/* Intro Banner */}
         <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm mb-8 leading-relaxed text-sm sm:text-base text-slate-700 dark:text-slate-300">
-          Welcome to <strong>SMR Solutions (Online)</strong>. By accessing our website (<strong>smrsolutions.online</strong>) or purchasing our digital services, you agree to comply with and be bound by the following terms and conditions.
+          Welcome to <strong>SMR Solutions</strong>. By accessing our website (<strong>smrsolutions.netlify.app</strong>) or purchasing our digital services, you agree to comply with and be bound by the following terms and conditions.
         </div>
 
         {/* 6 Core Sections */}
@@ -126,7 +126,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-0 sm:pl-11.5">
-              SMR Solutions (Online) provides digital setup services, including Google Business Profile (GBP) setup/optimization, website development, and custom Progressive Web Apps (PWAs). All project scopes, deliverables, timelines, and fees will be agreed upon in writing before work begins.
+              SMR Solutions provides digital setup services, including Google Business Profile (GBP) setup/optimization, website development, and custom Progressive Web Apps (PWAs). All project scopes, deliverables, timelines, and fees will be agreed upon in writing before work begins.
             </p>
           </div>
 
@@ -141,7 +141,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-0 sm:pl-11.5">
-              Clients must provide accurate business information, images, and necessary access credentials (such as Google account access or domain panel access) required to complete the services. SMR Solutions (Online) is not responsible for delays caused by missing or inaccurate client data.
+              Clients must provide accurate business information, images, and necessary access credentials (such as Google account access or domain panel access) required to complete the services. SMR Solutions is not responsible for delays caused by missing or inaccurate client data.
             </p>
           </div>
 
@@ -156,7 +156,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-0 sm:pl-11.5">
-              All services require a payment structure as agreed upon in the invoice or digital package card. SMR Solutions (Online) reserves the right to pause design or optimization work if payments are delayed.
+              All services require a payment structure as agreed upon in the invoice or digital package card. SMR Solutions reserves the right to pause design or optimization work if payments are delayed.
             </p>
           </div>
 
@@ -171,7 +171,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-0 sm:pl-11.5">
-              Upon full and final payment, ownership of the custom website code and digital assets will be transferred to the client. SMR Solutions (Online) retains the right to display completed projects in our portfolio and marketing materials unless a non-disclosure agreement is signed.
+              Upon full and final payment, ownership of the custom website code and digital assets will be transferred to the client. SMR Solutions retains the right to display completed projects in our portfolio and marketing materials unless a non-disclosure agreement is signed.
             </p>
           </div>
 
@@ -186,7 +186,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-0 sm:pl-11.5">
-              SMR Solutions (Online) utilizes industry-standard best practices for Google Maps Optimization and SEO. However, third-party search engine algorithms fluctuate constantly. We do not guarantee permanent fixed rankings, nor are we liable for sudden third-party platform policy changes or suspensions.
+              SMR Solutions utilizes industry-standard best practices for Google Maps Optimization and SEO. However, third-party search engine algorithms fluctuate constantly. We do not guarantee permanent fixed rankings, nor are we liable for sudden third-party platform policy changes or suspensions.
             </p>
           </div>
 
@@ -241,7 +241,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
       {/* Simple Minimalist Footer */}
       <footer className="py-6 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>© {new Date().getFullYear()} SMR Solutions (Online). All rights reserved.</span>
+          <span>© {new Date().getFullYear()} SMR Solutions. All rights reserved.</span>
           <div className="flex items-center gap-3">
             <button onClick={onNavigatePrivacy} className="hover:underline">Privacy Policy</button>
             <span>•</span>

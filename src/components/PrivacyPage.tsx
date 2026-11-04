@@ -103,13 +103,13 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({
             Privacy Policy
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-            Last Updated: {new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })} • Applicable to smrsolutions.online
+            Last Updated: {new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })} • Applicable to smrsolutions.netlify.app
           </p>
         </div>
 
         {/* Intro Banner */}
         <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm mb-8 leading-relaxed text-sm sm:text-base text-slate-700 dark:text-slate-300">
-          At <strong>SMR Solutions (Online)</strong>, accessible from <strong>smrsolutions.online</strong>, protecting the privacy of our clients and website visitors is a core priority. This document outlines how we collect, use, and protect your information in compliance with the <strong>Digital Personal Data Protection (DPDP) Act of India</strong>.
+          At <strong>SMR Solutions</strong>, accessible from <strong>smrsolutions.netlify.app</strong>, protecting the privacy of our clients and website visitors is a core priority. This document outlines how we collect, use, and protect your information in compliance with the <strong>Digital Personal Data Protection (DPDP) Act of India</strong>.
         </div>
 
         {/* 5 Core Privacy Sections */}
@@ -221,11 +221,11 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({
             </div>
             <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-0 sm:pl-11.5 space-y-2">
               <p>
-                For any privacy-related questions or data deletion requests, contact SMR Solutions (Online) directly via our official channels:
+                For any privacy-related questions or data deletion requests, contact SMR Solutions directly via our official channels:
               </p>
               <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-1.5">
-                <div><strong>Brand:</strong> SMR Solutions (Online)</div>
-                <div><strong>Official Website:</strong> smrsolutions.online</div>
+                <div><strong>Brand:</strong> SMR Solutions</div>
+                <div><strong>Official Website:</strong> smrsolutions.netlify.app</div>
                 <div><strong>Official Email:</strong> {siteConfig.email}</div>
                 <div><strong>Phone / WhatsApp:</strong> {siteConfig.phone}</div>
                 <div><strong>Location:</strong> Kengeri, Rajarajeshwari Nagar, Bengaluru, Karnataka, India</div>
@@ -269,7 +269,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({
       {/* Simple Minimalist Footer */}
       <footer className="py-6 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>© {new Date().getFullYear()} SMR Solutions (Online). All rights reserved.</span>
+          <span>© {new Date().getFullYear()} SMR Solutions. All rights reserved.</span>
           <div className="flex items-center gap-3">
             <button onClick={onNavigateTerms} className="hover:underline">Terms of Service</button>
             <span>•</span>
