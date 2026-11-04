@@ -9,11 +9,60 @@ import { BengaluruProof } from './components/BengaluruProof';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { CompliancePage } from './components/CompliancePage';
+
+const isComplianceRoute = (path: string, hash: string) => {
+  const p = path.toLowerCase().replace(/\/$/, '');
+  const h = hash.toLowerCase();
+  return (
+    p === '/compliance' ||
+    p === '/government-registration' ||
+    p === '/certificate' ||
+    p === '/msme' ||
+    h === '#compliance' ||
+    h === '#/compliance' ||
+    h === '#government-registration' ||
+    h === '#msme'
+  );
+};
 
 const MainApp: React.FC = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isAppInstalled, setIsAppInstalled] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname);
+  const [currentHash, setCurrentHash] = useState<string>(() => window.location.hash);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
+
+  const navigateTo = (path: string) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    setCurrentHash('');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const showCompliance = isComplianceRoute(currentPath, currentHash);
+
+  useEffect(() => {
+    if (showCompliance) {
+      document.title = "Government Registration & Compliance | SMR Solutions";
+    } else {
+      document.title = "SMR Solutions | Google Maps Optimization & Modern Websites";
+    }
+  }, [showCompliance]);
 
   useEffect(() => {
     // Check if app is launched in standalone mode
@@ -76,6 +125,12 @@ const MainApp: React.FC = () => {
     }
   };
 
+  if (showCompliance) {
+    return (
+      <CompliancePage onBackToHome={() => navigateTo('/')} />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#070A12] dark:text-slate-100 flex flex-col font-sans transition-colors duration-300">
       {/* Toast Notification (subtle, non-intrusive) */}
@@ -87,12 +142,20 @@ const MainApp: React.FC = () => {
       )}
 
       {/* Navigation with Brand Logo & Light/Dark Switch */}
-      <Navbar onInstallApp={handleInstallApp} isAppInstalled={isAppInstalled} />
+      <Navbar
+        onInstallApp={handleInstallApp}
+        isAppInstalled={isAppInstalled}
+        onNavigateCompliance={() => navigateTo('/compliance')}
+      />
 
       {/* Main One-Page Web Services */}
       <main className="flex-1">
         {/* 1. Hero Section */}
-        <Hero onInstallApp={handleInstallApp} isAppInstalled={isAppInstalled} />
+        <Hero
+          onInstallApp={handleInstallApp}
+          isAppInstalled={isAppInstalled}
+          onNavigateCompliance={() => navigateTo('/compliance')}
+        />
 
         {/* 2. Services: The Complete Google Mapping, Modern Websites, PWAs */}
         <Services />
@@ -114,7 +177,7 @@ const MainApp: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onNavigateCompliance={() => navigateTo('/compliance')} />
 
       {/* Sticky Floating WhatsApp Lead Widget */}
       <FloatingWhatsApp />

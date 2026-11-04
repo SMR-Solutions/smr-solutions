@@ -367,5 +367,30 @@ export const siteConfig = {
       q: "Can I update my phone number, prices, or photos later?",
       a: "Yes! We build our code and assets clean and modular. We also provide full guidance on how to manage your Google Business Profile directly from your phone."
     }
-  ]
+  ],
+
+  compliance: {
+    title: "Government Registration & Compliance",
+    officialStatusText: "SMR Solutions (Online) is officially registered as a Micro Enterprise with the Ministry of Micro, Small & Medium Enterprises (MSME), Government of India.",
+    enterpriseName: "SMR Solutions (Online)",
+    enterpriseType: "Micro Enterprise",
+    ministry: "Ministry of Micro, Small & Medium Enterprises (MSME)",
+    government: "Government of India",
+    portalName: "Udyam Registration Portal",
+    portalUrl: "https://udyamregistration.gov.in/",
+    images: [
+      {
+        page: 1,
+        title: "Udyam Registration Certificate - Page 1",
+        src: "/certificates/MSME-1.png",
+        caption: "Official Udyam Registration Certificate including official QR code, registration identifier, and government seal."
+      },
+      {
+        page: 2,
+        title: "Udyam Registration Certificate - Page 2",
+        src: "/certificates/MSME-2.png",
+        caption: "Official Enterprise Classification, National Industry Classification (NIC Code), and registered business activity details."
+      }
+    ]
+  }
 };

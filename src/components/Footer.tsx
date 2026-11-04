@@ -1,8 +1,12 @@
 import React from 'react';
-import { MessageCircle, MapPin, Mail } from 'lucide-react';
+import { MessageCircle, MapPin, Mail, ShieldCheck } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigateCompliance?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigateCompliance }) => {
   return (
     <footer className="pt-12 sm:pt-16 pb-24 md:pb-16 bg-slate-100 dark:bg-[#04060c] border-t border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs sm:text-sm transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,6 +62,19 @@ export const Footer: React.FC = () => {
                   ₹5,000 Starter Offer
                 </a>
               </li>
+              <li className="pt-1.5 border-t border-slate-200 dark:border-slate-800">
+                <a
+                  href="/compliance"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateCompliance?.();
+                  }}
+                  className="inline-flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-bold hover:underline"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Govt. MSME Certificate</span>
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -99,8 +116,15 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-6 sm:pt-8 border-t border-slate-200 dark:border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
-          <div>
-            © {new Date().getFullYear()} SMR Solutions. All rights reserved.
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3">
+            <span>© {new Date().getFullYear()} SMR Solutions. All rights reserved.</span>
+            <span>•</span>
+            <button
+              onClick={onNavigateCompliance}
+              className="text-emerald-700 dark:text-emerald-400 hover:underline font-semibold cursor-pointer"
+            >
+              Government Registration & Compliance
+            </button>
           </div>
           <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
             <span>Serving Kengeri • Rajarajeshwari Nagar • Bengaluru</span>

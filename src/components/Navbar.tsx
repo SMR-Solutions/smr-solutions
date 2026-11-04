@@ -6,9 +6,10 @@ import { ThemeToggle } from './ThemeToggle';
 interface NavbarProps {
   onInstallApp: () => void;
   isAppInstalled: boolean;
+  onNavigateCompliance?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled, onNavigateCompliance }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -216,6 +217,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled }) 
               className="px-3 py-2.5 rounded-lg text-sm sm:text-base font-medium text-slate-800 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800/60 transition-colors"
             >
               FAQ
+            </a>
+
+            <a
+              href="/compliance"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                onNavigateCompliance?.();
+              }}
+              className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-500/40 text-xs font-bold text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors mt-1"
+            >
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span>Govt. MSME Registration</span>
+              </div>
+              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold underline">View Certificate →</span>
             </a>
           </div>
 

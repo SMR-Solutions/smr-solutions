@@ -1,13 +1,14 @@
 import React from 'react';
-import { MessageCircle, MapPin, ArrowRight, Zap, Star, Download, Check } from 'lucide-react';
+import { MessageCircle, MapPin, ArrowRight, Zap, Star, Download, Check, ShieldCheck } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 interface HeroProps {
   onInstallApp: () => void;
   isAppInstalled: boolean;
+  onNavigateCompliance?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onInstallApp, isAppInstalled }) => {
+export const Hero: React.FC<HeroProps> = ({ onInstallApp, isAppInstalled, onNavigateCompliance }) => {
   return (
     <section className="relative pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 overflow-hidden transition-colors duration-300">
       {/* Background radial gradient glow */}
@@ -27,11 +28,23 @@ export const Hero: React.FC<HeroProps> = ({ onInstallApp, isAppInstalled }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto">
           
-          {/* Active Locality Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white dark:bg-slate-900/90 border border-emerald-500/40 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-[11px] sm:text-xs md:text-sm font-semibold mb-4 sm:mb-6 shadow-md shadow-emerald-500/10 dark:shadow-emerald-950/40 backdrop-blur-sm animate-pulse-glow max-w-full">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping shrink-0" />
-            <MapPin className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-            <span className="truncate">Serving Kengeri, Rajarajeshwari Nagar & Bengaluru</span>
+          {/* Active Locality & Govt MSME Registration Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-4 sm:mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white dark:bg-slate-900/90 border border-emerald-500/40 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-[11px] sm:text-xs md:text-sm font-semibold shadow-md shadow-emerald-500/10 dark:shadow-emerald-950/40 backdrop-blur-sm animate-pulse-glow max-w-full">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping shrink-0" />
+              <MapPin className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+              <span className="truncate">Serving Kengeri, Rajarajeshwari Nagar & Bengaluru</span>
+            </div>
+
+            <button
+              onClick={onNavigateCompliance}
+              className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300 text-[11px] sm:text-xs font-bold hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-all cursor-pointer shadow-sm active:scale-95"
+              title="View official Government MSME registration certificate"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+              <span>Govt. MSME Registered Micro Enterprise</span>
+              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 underline font-semibold ml-0.5">View →</span>
+            </button>
           </div>
 
           {/* Core Headline */}
