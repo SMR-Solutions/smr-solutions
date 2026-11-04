@@ -10,11 +10,16 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { CompliancePage } from './components/CompliancePage';
+import { TermsPage } from './components/TermsPage';
+import { PrivacyPage } from './components/PrivacyPage';
 
-const isComplianceRoute = (path: string, hash: string) => {
+type RouteType = 'home' | 'compliance' | 'terms' | 'privacy';
+
+const getRoute = (path: string, hash: string): RouteType => {
   const p = path.toLowerCase().replace(/\/$/, '');
   const h = hash.toLowerCase();
-  return (
+
+  if (
     p === '/compliance' ||
     p === '/government-registration' ||
     p === '/certificate' ||
@@ -23,7 +28,19 @@ const isComplianceRoute = (path: string, hash: string) => {
     h === '#/compliance' ||
     h === '#government-registration' ||
     h === '#msme'
-  );
+  ) {
+    return 'compliance';
+  }
+
+  if (p === '/terms' || p === '/terms-of-service' || h === '#terms' || h === '#/terms') {
+    return 'terms';
+  }
+
+  if (p === '/privacy' || p === '/privacy-policy' || h === '#privacy' || h === '#/privacy') {
+    return 'privacy';
+  }
+
+  return 'home';
 };
 
 const MainApp: React.FC = () => {
@@ -54,15 +71,19 @@ const MainApp: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const showCompliance = isComplianceRoute(currentPath, currentHash);
+  const currentRoute = getRoute(currentPath, currentHash);
 
   useEffect(() => {
-    if (showCompliance) {
-      document.title = "Government Registration & Compliance | SMR Solutions";
+    if (currentRoute === 'compliance') {
+      document.title = "Government Registration & Compliance | SMR Solutions (Online)";
+    } else if (currentRoute === 'terms') {
+      document.title = "Terms of Service | SMR Solutions (Online)";
+    } else if (currentRoute === 'privacy') {
+      document.title = "Privacy Policy | SMR Solutions (Online)";
     } else {
       document.title = "SMR Solutions | Google Maps Optimization & Modern Websites";
     }
-  }, [showCompliance]);
+  }, [currentRoute]);
 
   useEffect(() => {
     // Check if app is launched in standalone mode
@@ -125,9 +146,33 @@ const MainApp: React.FC = () => {
     }
   };
 
-  if (showCompliance) {
+  if (currentRoute === 'compliance') {
     return (
-      <CompliancePage onBackToHome={() => navigateTo('/')} />
+      <CompliancePage
+        onBackToHome={() => navigateTo('/')}
+        onNavigateTerms={() => navigateTo('/terms')}
+        onNavigatePrivacy={() => navigateTo('/privacy')}
+      />
+    );
+  }
+
+  if (currentRoute === 'terms') {
+    return (
+      <TermsPage
+        onBackToHome={() => navigateTo('/')}
+        onNavigatePrivacy={() => navigateTo('/privacy')}
+        onNavigateCompliance={() => navigateTo('/compliance')}
+      />
+    );
+  }
+
+  if (currentRoute === 'privacy') {
+    return (
+      <PrivacyPage
+        onBackToHome={() => navigateTo('/')}
+        onNavigateTerms={() => navigateTo('/terms')}
+        onNavigateCompliance={() => navigateTo('/compliance')}
+      />
     );
   }
 
@@ -146,6 +191,8 @@ const MainApp: React.FC = () => {
         onInstallApp={handleInstallApp}
         isAppInstalled={isAppInstalled}
         onNavigateCompliance={() => navigateTo('/compliance')}
+        onNavigateTerms={() => navigateTo('/terms')}
+        onNavigatePrivacy={() => navigateTo('/privacy')}
       />
 
       {/* Main One-Page Web Services */}
@@ -177,7 +224,11 @@ const MainApp: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <Footer onNavigateCompliance={() => navigateTo('/compliance')} />
+      <Footer
+        onNavigateCompliance={() => navigateTo('/compliance')}
+        onNavigateTerms={() => navigateTo('/terms')}
+        onNavigatePrivacy={() => navigateTo('/privacy')}
+      />
 
       {/* Sticky Floating WhatsApp Lead Widget */}
       <FloatingWhatsApp />

@@ -4,9 +4,15 @@ import { siteConfig } from '../config/siteConfig';
 
 interface FooterProps {
   onNavigateCompliance?: () => void;
+  onNavigateTerms?: () => void;
+  onNavigatePrivacy?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigateCompliance }) => {
+export const Footer: React.FC<FooterProps> = ({
+  onNavigateCompliance,
+  onNavigateTerms,
+  onNavigatePrivacy
+}) => {
   return (
     <footer className="pt-12 sm:pt-16 pb-24 md:pb-16 bg-slate-100 dark:bg-[#04060c] border-t border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs sm:text-sm transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,13 +123,27 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateCompliance }) => {
         {/* Bottom Bar */}
         <div className="pt-6 sm:pt-8 border-t border-slate-200 dark:border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3">
-            <span>© {new Date().getFullYear()} SMR Solutions. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} SMR Solutions (Online). All rights reserved.</span>
+            <span>•</span>
+            <button
+              onClick={onNavigateTerms}
+              className="hover:underline hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
+            >
+              Terms of Service
+            </button>
+            <span>•</span>
+            <button
+              onClick={onNavigatePrivacy}
+              className="hover:underline hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
+            >
+              Privacy Policy
+            </button>
             <span>•</span>
             <button
               onClick={onNavigateCompliance}
               className="text-emerald-700 dark:text-emerald-400 hover:underline font-semibold cursor-pointer"
             >
-              Government Registration & Compliance
+              Govt. MSME Compliance
             </button>
           </div>
           <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400">

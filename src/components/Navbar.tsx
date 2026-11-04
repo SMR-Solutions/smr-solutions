@@ -7,9 +7,17 @@ interface NavbarProps {
   onInstallApp: () => void;
   isAppInstalled: boolean;
   onNavigateCompliance?: () => void;
+  onNavigateTerms?: () => void;
+  onNavigatePrivacy?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled, onNavigateCompliance }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onInstallApp,
+  isAppInstalled,
+  onNavigateCompliance,
+  onNavigateTerms,
+  onNavigatePrivacy
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -234,6 +242,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onInstallApp, isAppInstalled, on
               </div>
               <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold underline">View Certificate →</span>
             </a>
+
+            <div className="flex items-center justify-center gap-3 pt-2 text-[11px] text-slate-500 dark:text-slate-400 border-t border-slate-200/80 dark:border-slate-800/80">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onNavigateTerms?.();
+                }}
+                className="hover:underline hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
+              >
+                Terms of Service
+              </button>
+              <span>•</span>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onNavigatePrivacy?.();
+                }}
+                className="hover:underline hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
+              >
+                Privacy Policy
+              </button>
+            </div>
           </div>
 
           <div className="pt-2 flex flex-col gap-2.5">

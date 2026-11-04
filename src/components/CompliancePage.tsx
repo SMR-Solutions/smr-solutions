@@ -5,9 +5,15 @@ import { ThemeToggle } from './ThemeToggle';
 
 interface CompliancePageProps {
   onBackToHome: () => void;
+  onNavigateTerms?: () => void;
+  onNavigatePrivacy?: () => void;
 }
 
-export const CompliancePage: React.FC<CompliancePageProps> = ({ onBackToHome }) => {
+export const CompliancePage: React.FC<CompliancePageProps> = ({
+  onBackToHome,
+  onNavigateTerms,
+  onNavigatePrivacy
+}) => {
   const [activeTab, setActiveTab] = useState<'both' | 1 | 2>('both');
   const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string; caption: string } | null>(null);
 
@@ -69,6 +75,29 @@ export const CompliancePage: React.FC<CompliancePageProps> = ({ onBackToHome }) 
       {/* Main Content Area */}
       <main className="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 w-full">
         
+        {/* Navigation Tabs (Compliance / Terms / Privacy) */}
+        <div className="flex items-center justify-center mb-6">
+          <div className="inline-flex p-1 rounded-2xl bg-slate-200/80 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-xs font-semibold shadow-inner">
+            <button
+              onClick={onNavigateTerms}
+              className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white transition-all cursor-pointer"
+            >
+              Terms of Service
+            </button>
+            <button
+              onClick={onNavigatePrivacy}
+              className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white transition-all cursor-pointer"
+            >
+              Privacy Policy
+            </button>
+            <button
+              className="px-4 py-2 rounded-xl bg-white dark:bg-emerald-500 text-slate-950 shadow-md font-bold transition-all cursor-pointer"
+            >
+              Govt. MSME Compliance
+            </button>
+          </div>
+        </div>
+
         {/* Verification Breadcrumb Badge */}
         <div className="flex items-center justify-center mb-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-sm">
@@ -376,15 +405,22 @@ export const CompliancePage: React.FC<CompliancePageProps> = ({ onBackToHome }) 
       <footer className="py-6 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>© {new Date().getFullYear()} SMR Solutions. Registered Micro Enterprise, Govt. of India.</span>
-          <button
-            onClick={onBackToHome}
-            className="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold cursor-pointer"
-          >
-            ← Back to Home
-          </button>
+          <div className="flex items-center gap-3">
+            <button onClick={onNavigateTerms} className="hover:underline">Terms of Service</button>
+            <span>•</span>
+            <button onClick={onNavigatePrivacy} className="hover:underline">Privacy Policy</button>
+            <span>•</span>
+            <button
+              onClick={onBackToHome}
+              className="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold cursor-pointer"
+            >
+              ← Back to Home
+            </button>
+          </div>
         </div>
       </footer>
 
     </div>
   );
 };
+
