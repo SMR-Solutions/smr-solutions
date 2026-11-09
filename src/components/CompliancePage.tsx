@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ShieldCheck, CheckCircle2, Eye, Maximize2, FileText, Lock, X, MessageCircle, ExternalLink } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 import { ThemeToggle } from './ThemeToggle';
@@ -18,6 +18,44 @@ export const CompliancePage: React.FC<CompliancePageProps> = ({
   const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string; caption: string } | null>(null);
 
   const compliance = siteConfig.compliance;
+
+  const openLightbox = (img: { src: string; title: string; caption: string }) => {
+    setLightboxImage(img);
+    window.history.pushState({ modal: 'cert-lightbox' }, '', window.location.pathname + '#view-cert');
+  };
+
+  const closeLightbox = (popHistory = true) => {
+    setLightboxImage(null);
+    if (popHistory && window.location.hash === '#view-cert') {
+      window.history.back();
+    }
+  };
+
+  useEffect(() => {
+    if (!lightboxImage) return;
+
+    const handlePopState = () => {
+      closeLightbox(false);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeLightbox(true);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [lightboxImage]);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#070A12] dark:text-slate-100 flex flex-col font-sans transition-colors duration-300">
@@ -222,7 +260,7 @@ export const CompliancePage: React.FC<CompliancePageProps> = ({
                     </span>
                   </div>
                   <button
-                    onClick={() => setLightboxImage(compliance.images[0])}
+                    onClick={() => openLightbox(compliance.images[0])}
                     className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 border border-slate-300 dark:border-slate-600 shadow-sm transition-all cursor-pointer"
                     title="Click to view full screen"
                   >
@@ -234,7 +272,7 @@ export const CompliancePage: React.FC<CompliancePageProps> = ({
                 {/* Embedded Certificate Page 1 Image */}
                 <div
                   className="p-3 sm:p-6 bg-slate-50 dark:bg-slate-950/60 flex items-center justify-center cursor-pointer group relative"
-                  onClick={() => setLightboxImage(compliance.images[0])}
+                  onClick={() => openLightbox(compliance.images[0])}
                   title="Click image to zoom in"
                 >
                   <div className="relative max-w-3xl w-full rounded-xl overflow-hidden shadow-2xl border border-slate-300 dark:border-slate-700 bg-white">
@@ -277,7 +315,7 @@ export const CompliancePage: React.FC<CompliancePageProps> = ({
                     </span>
                   </div>
                   <button
-                    onClick={() => setLightboxImage(compliance.images[1])}
+                    onClick={() => openLightbox(compliance.images[1])}
                     className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 border border-slate-300 dark:border-slate-600 shadow-sm transition-all cursor-pointer"
                     title="Click to view full screen"
                   >
@@ -289,7 +327,7 @@ export const CompliancePage: React.FC<CompliancePageProps> = ({
                 {/* Embedded Certificate Page 2 Image */}
                 <div
                   className="p-3 sm:p-6 bg-slate-50 dark:bg-slate-950/60 flex items-center justify-center cursor-pointer group relative"
-                  onClick={() => setLightboxImage(compliance.images[1])}
+                  onClick={() => openLightbox(compliance.images[1])}
                   title="Click image to zoom in"
                 >
                   <div className="relative max-w-3xl w-full rounded-xl overflow-hidden shadow-2xl border border-slate-300 dark:border-slate-700 bg-white">
@@ -368,19 +406,20 @@ export const CompliancePage: React.FC<CompliancePageProps> = ({
       {lightboxImage && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-md animate-in fade-in duration-200"
-          onClick={() => setLightboxImage(null)}
+          onClick={() => closeLightbox(true)}
         >
           <div
             className="relative max-w-4xl w-full max-h-[95vh] flex flex-col items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
+            {/* Prominent Red Close Button */}
             <button
-              onClick={() => setLightboxImage(null)}
-              className="absolute -top-12 right-0 p-2 rounded-full bg-slate-800 text-white hover:bg-slate-700 cursor-pointer shadow-lg transition-all"
+              onClick={() => closeLightbox(true)}
+              className="absolute -top-12 right-0 p-2 sm:p-2.5 rounded-full bg-red-600 hover:bg-red-500 active:scale-95 text-white shadow-xl shadow-red-950/60 border-2 border-red-400/80 cursor-pointer transition-all flex items-center justify-center group"
               aria-label="Close Preview"
+              title="Close Preview (Esc or Back)"
             >
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6 stroke-[3] text-white group-hover:rotate-90 transition-transform duration-200" />
             </button>
 
             {/* Certificate High-Res Viewer */}

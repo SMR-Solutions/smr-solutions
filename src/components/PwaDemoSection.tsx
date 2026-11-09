@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Smartphone, Download, Check, ExternalLink, Star, MapPin, MessageCircle, ArrowRight, Eye, X, Layers, Image as ImageIcon } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Smartphone, Download, Check, ExternalLink, Star, MapPin, MessageCircle, ArrowRight, Eye, X, Layers, Image as ImageIcon, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 import type { ProjectImage } from '../config/siteConfig';
 
@@ -16,8 +16,184 @@ export const PwaDemoSection: React.FC<PwaDemoSectionProps> = ({
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [lightboxImage, setLightboxImage] = useState<ProjectImage | null>(null);
 
+  // Zoom & Pan States for the modal
+  const [zoomScale, setZoomScale] = useState<number>(1);
+  const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [lastTouchDistance, setLastTouchDistance] = useState<number | null>(null);
+
   const currentProject = siteConfig.portfolio.find((p) => p.id === selectedProjectId) || siteConfig.portfolio[0];
   const activeImage = currentProject.images[selectedImageIndex] || currentProject.images[0];
+
+  // Open Lightbox with history push state (prevents mobile back button from exiting website)
+  const openLightbox = (img: ProjectImage) => {
+    setLightboxImage(img);
+    setZoomScale(1);
+    setPanOffset({ x: 0, y: 0 });
+    setIsDragging(false);
+
+    // Push state to browser history so mobile hardware/gesture back button closes modal
+    window.history.pushState({ modal: 'photo-lightbox' }, '', window.location.pathname + '#view-photo');
+  };
+
+  // Close Lightbox safely
+  const closeLightbox = (popHistory = true) => {
+    setLightboxImage(null);
+    setZoomScale(1);
+    setPanOffset({ x: 0, y: 0 });
+    setIsDragging(false);
+
+    if (popHistory && window.location.hash === '#view-photo') {
+      window.history.back();
+    }
+  };
+
+  // Zoom Controls
+  const handleZoomIn = () => {
+    setZoomScale((prev) => Math.min(Number((prev + 0.5).toFixed(1)), 4));
+  };
+
+  const handleZoomOut = () => {
+    setZoomScale((prev) => {
+      const next = Math.max(Number((prev - 0.5).toFixed(1)), 1);
+      if (next === 1) {
+        setPanOffset({ x: 0, y: 0 });
+      }
+      return next;
+    });
+  };
+
+  const handleResetZoom = () => {
+    setZoomScale(1);
+    setPanOffset({ x: 0, y: 0 });
+  };
+
+  // Mouse drag & Wheel zoom
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoomScale > 1) {
+      e.preventDefault();
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - panOffset.x, y: e.clientY - panOffset.y });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoomScale > 1) {
+      e.preventDefault();
+      setPanOffset({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.stopPropagation();
+    if (e.deltaY < 0) {
+      handleZoomIn();
+    } else {
+      handleZoomOut();
+    }
+  };
+
+  // Touch Drag & Pinch-to-zoom
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && zoomScale > 1) {
+      setIsDragging(true);
+      setDragStart({
+        x: e.touches[0].clientX - panOffset.x,
+        y: e.touches[0].clientY - panOffset.y
+      });
+    } else if (e.touches.length === 2) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      setLastTouchDistance(dist);
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && isDragging && zoomScale > 1) {
+      setPanOffset({
+        x: e.touches[0].clientX - dragStart.x,
+        y: e.touches[0].clientY - dragStart.y
+      });
+    } else if (e.touches.length === 2 && lastTouchDistance !== null) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const delta = dist - lastTouchDistance;
+      if (Math.abs(delta) > 4) {
+        if (delta > 0) {
+          setZoomScale((prev) => Math.min(Number((prev + 0.05).toFixed(2)), 4));
+        } else {
+          setZoomScale((prev) => {
+            const next = Math.max(Number((prev - 0.05).toFixed(2)), 1);
+            if (next === 1) setPanOffset({ x: 0, y: 0 });
+            return next;
+          });
+        }
+        setLastTouchDistance(dist);
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    setLastTouchDistance(null);
+  };
+
+  const handleDoubleClick = () => {
+    if (zoomScale > 1) {
+      handleResetZoom();
+    } else {
+      setZoomScale(2);
+    }
+  };
+
+  // Keyboard navigation & mobile popstate listener
+  useEffect(() => {
+    if (!lightboxImage) return;
+
+    // Handle mobile back button
+    const handlePopState = () => {
+      // The user pressed the hardware/gesture back button on mobile!
+      // Close modal directly without calling history.back()
+      closeLightbox(false);
+    };
+
+    // Handle keyboard shortcuts
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeLightbox(true);
+      } else if (e.key === '+' || e.key === '=') {
+        handleZoomIn();
+      } else if (e.key === '-' || e.key === '_') {
+        handleZoomOut();
+      } else if (e.key === '0') {
+        handleResetZoom();
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [lightboxImage]);
 
   // Flatten all images into a master chronological list
   const allPortfolioImages: { project: typeof currentProject; image: ProjectImage }[] = [];
@@ -176,7 +352,7 @@ export const PwaDemoSection: React.FC<PwaDemoSectionProps> = ({
                 </div>
 
                 {/* Active Image Display */}
-                <div className="flex-1 overflow-y-auto relative bg-slate-900/60 cursor-pointer" onClick={() => setLightboxImage(activeImage)}>
+                <div className="flex-1 overflow-y-auto relative bg-slate-900/60 cursor-pointer" onClick={() => openLightbox(activeImage)}>
                   <img
                     src={activeImage.src}
                     alt={activeImage.label}
@@ -254,7 +430,7 @@ export const PwaDemoSection: React.FC<PwaDemoSectionProps> = ({
                   Currently Viewing: <span className="text-emerald-600 dark:text-emerald-400">{activeImage.label}</span>
                 </span>
                 <button
-                  onClick={() => setLightboxImage(activeImage)}
+                  onClick={() => openLightbox(activeImage)}
                   className="text-[10px] font-bold text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <Eye className="w-3 h-3" />
@@ -371,33 +547,121 @@ export const PwaDemoSection: React.FC<PwaDemoSectionProps> = ({
 
       </div>
 
-      {/* High-Resolution Lightbox Modal */}
+      {/* High-Resolution Interactive Lightbox Modal with Zoom & Mobile-Back Support */}
       {lightboxImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
-          onClick={() => setLightboxImage(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/95 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => closeLightbox(true)}
         >
-          <div
-            className="relative max-w-4xl w-full max-h-[92vh] flex flex-col items-center justify-center"
+          {/* Top Control Bar: Floating Zoom Pill + Vibrant Red Close Button */}
+          <div 
+            className="absolute top-3 sm:top-5 left-3 sm:left-6 right-3 sm:right-6 flex items-center justify-between gap-2 z-30 pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setLightboxImage(null)}
-              className="absolute -top-10 sm:-top-12 right-0 p-2 rounded-full bg-slate-800 text-white hover:bg-slate-700 cursor-pointer shadow-lg"
-              aria-label="Close Preview"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            {/* Zoom In/Out Floating Pill */}
+            <div className="flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700 shadow-2xl">
+              <button
+                onClick={handleZoomOut}
+                disabled={zoomScale <= 1}
+                className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-slate-200 hover:text-white cursor-pointer active:scale-95"
+                title="Zoom Out (-)"
+                aria-label="Zoom Out"
+              >
+                <ZoomOut className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
 
-            <div className="rounded-2xl overflow-hidden border border-slate-700 bg-slate-950 shadow-2xl max-h-[80vh] overflow-y-auto">
-              <img
-                src={lightboxImage.src}
-                alt={lightboxImage.label}
-                className="w-full h-auto max-h-[75vh] object-contain"
-              />
+              <button
+                onClick={handleResetZoom}
+                className="px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-cyan-300 transition-colors cursor-pointer"
+                title="Click to reset zoom (100%)"
+              >
+                {Math.round(zoomScale * 100)}%
+              </button>
+
+              <button
+                onClick={handleZoomIn}
+                disabled={zoomScale >= 4}
+                className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-slate-200 hover:text-white cursor-pointer active:scale-95"
+                title="Zoom In (+)"
+                aria-label="Zoom In"
+              >
+                <ZoomIn className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+
+              {zoomScale > 1 && (
+                <button
+                  onClick={handleResetZoom}
+                  className="p-1.5 sm:p-2 rounded-xl hover:bg-slate-800 text-amber-400 hover:text-amber-300 transition-colors cursor-pointer active:scale-95"
+                  title="Reset to 100%"
+                  aria-label="Reset Zoom"
+                >
+                  <RotateCcw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </button>
+              )}
             </div>
 
-            <div className="mt-3 text-center px-4">
+            {/* Prominent Red Close Cross Button */}
+            <button
+              onClick={() => closeLightbox(true)}
+              className="p-2 sm:p-2.5 rounded-full bg-red-600 hover:bg-red-500 active:scale-95 text-white shadow-xl shadow-red-950/60 border-2 border-red-400/80 cursor-pointer transition-all flex items-center justify-center group"
+              aria-label="Close Preview"
+              title="Close Preview (Esc or Back)"
+            >
+              <X className="w-5 h-5 sm:w-6 sm:h-6 stroke-[3] text-white group-hover:rotate-90 transition-transform duration-200" />
+            </button>
+          </div>
+
+          {/* Modal Container */}
+          <div
+            className="relative max-w-4xl w-full max-h-[92vh] flex flex-col items-center justify-center pt-12 sm:pt-14 pb-2"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Viewport Frame with Zoom & Pan */}
+            <div 
+              className="relative w-full rounded-2xl overflow-hidden border border-slate-700 bg-slate-950 shadow-2xl flex items-center justify-center select-none"
+              onWheel={handleWheel}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onDoubleClick={handleDoubleClick}
+            >
+              {/* Interaction Hints */}
+              {zoomScale === 1 ? (
+                <div className="absolute top-2 left-2 px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-700 text-slate-400 text-[10px] pointer-events-none z-10 flex items-center gap-1.5 opacity-80 sm:opacity-100">
+                  <span>🔍 Double-click or pinch to zoom</span>
+                </div>
+              ) : (
+                <div className="absolute top-2 left-2 px-2.5 py-1 rounded-md bg-slate-900/90 border border-emerald-500/50 text-emerald-300 text-[10px] pointer-events-none z-10 flex items-center gap-1.5 animate-pulse">
+                  <span>✋ Drag to pan around</span>
+                </div>
+              )}
+
+              {/* Scalable Image Canvas */}
+              <div className="w-full h-[60vh] sm:h-[72vh] flex items-center justify-center overflow-hidden p-1 sm:p-2">
+                <div
+                  style={{
+                    transform: `scale(${zoomScale}) translate(${panOffset.x / zoomScale}px, ${panOffset.y / zoomScale}px)`,
+                    transition: isDragging ? 'none' : 'transform 0.15s ease-out',
+                    cursor: zoomScale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in'
+                  }}
+                  className="w-full h-full flex items-center justify-center origin-center"
+                >
+                  <img
+                    src={lightboxImage.src}
+                    alt={lightboxImage.label}
+                    draggable={false}
+                    className="max-w-full max-h-full object-contain pointer-events-none select-none rounded-lg"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Caption & Info */}
+            <div className="mt-2.5 text-center px-4 w-full">
               <div className="text-sm sm:text-base font-bold text-white">{lightboxImage.label}</div>
               <div className="text-xs text-slate-300 max-w-xl mx-auto mt-0.5">{lightboxImage.caption}</div>
             </div>
